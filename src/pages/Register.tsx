@@ -5,7 +5,6 @@ import {
   faUser, 
   faEnvelope, 
   faIdCard, 
-  faLock,
   faEye,
   faEyeSlash,
   faFutbol

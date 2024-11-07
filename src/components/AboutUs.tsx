@@ -1,4 +1,3 @@
-import { Shield, Clock, MapPin, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrophy, faHandshake, faHeart } from '@fortawesome/free-solid-svg-icons';

@@ -1,8 +1,8 @@
 import React from 'react';
-import { QRCodeSVG } from 'qrcode.react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { QRCodeCanvas } from 'qrcode.react';
 
 interface QRCodeComponentProps {
   bookingId: string;
@@ -39,12 +39,7 @@ const QRCodeComponent: React.FC<QRCodeComponentProps> = ({
       className="flex flex-col items-center space-y-4"
     >
       <div className="bg-white p-6 rounded-xl shadow-lg">
-        <QRCodeSVG
-          value={qrValue}
-          size={size}
-          level="H"
-          includeMargin={true}
-        />
+        <QRCodeCanvas value={qrValue} size={size} />
       </div>
       
       <div className="text-center space-y-2">

@@ -6,7 +6,6 @@ import {
   faEnvelope, 
   faPhone, 
   faIdCard,
-  faLock,
   faEye,
   faEyeSlash,
   faSave,
@@ -56,7 +55,6 @@ const ProfileForm = () => {
       nombre: user?.nombre || '',
       apellido: user?.apellido || '',
       correo: user?.correo || '',
-      telefono: user?.telefono || '',
     }
   });
 
@@ -68,7 +66,6 @@ const ProfileForm = () => {
         nombre: data.nombre,
         apellido: data.apellido,
         correo: data.correo,
-        telefono: data.telefono
       };
 
       if (data.nuevaContraseña) {

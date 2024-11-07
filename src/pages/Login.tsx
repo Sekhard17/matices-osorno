@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faEnvelope, 
-  faLock, 
   faEye, 
   faEyeSlash, 
   faFutbol 
