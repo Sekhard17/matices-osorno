@@ -31,7 +31,7 @@ const PaymentModal = ({ isOpen, onClose, bookingData }: PaymentModalProps) => {
 
     setIsProcessing(true);
     try {
-      // Aquí iría la integración con Flow
+      // Aquí iría la integración con Mercado Pago
       // Por ahora simulamos un proceso de pago
       await new Promise(resolve => setTimeout(resolve, 2000));
       
