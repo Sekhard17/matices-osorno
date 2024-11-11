@@ -13,24 +13,71 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+// Definir la estructura de datos de `formData`
+interface FormData {
+  nombre: string;
+  apellido: string;
+  correo: string; // Cambiado a 'correo' para que coincida con el backend
+  rut: string;
+  contraseña: string; // Cambiado a 'contraseña' para que coincida con el backend
+  confirmPassword: string;
+}
+
 const Register = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     nombre: '',
     apellido: '',
-    email: '',
+    correo: '', // Cambiado a 'correo' para que coincida con el backend
     rut: '',
-    password: '',
+    contraseña: '', // Cambiado a 'contraseña' para que coincida con el backend
     confirmPassword: ''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Función para formatear el RUT
+  const formatRut = (value: string): string => {
+    const cleanRut = value.replace(/[^\dkK]/g, '').toUpperCase();
+    if (cleanRut.length <= 1) return cleanRut;
+    return `${cleanRut.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}-${
+      cleanRut.slice(-1)
+    }`;
+  };
+
+  // Función para capitalizar palabras
+  const capitalizeWords = (value: string): string => {
+    return value
+      .toLowerCase()
+      .replace(/(?:^|\s)\S/g, (a) => a.toUpperCase());
+  };
+
+  // Cambios de estado tipados para evitar `any` implícito
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+
+    // Formato y capitalización de RUT, nombre y apellido
+    let formattedValue = value;
+    if (name === 'rut') formattedValue = formatRut(value);
+    if (name === 'nombre' || name === 'apellido') formattedValue = capitalizeWords(value);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: formattedValue,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    
-    if (formData.password !== formData.confirmPassword) {
+
+    // Validación de campos vacíos
+    if (Object.values(formData).some((field) => field === '')) {
+      toast.error('Todos los campos deben ser completados');
+      return;
+    }
+
+    if (formData.contraseña !== formData.confirmPassword) {
       toast.error('Las contraseñas no coinciden');
       return;
     }
@@ -38,13 +85,16 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://canchas-matices.fly.dev/api/usuarios', {
+      // Mapeo de datos para el backend
+      const mappedFormData = {
         nombre: formData.nombre,
         apellido: formData.apellido,
-        email: formData.email,
+        correo: formData.correo,
         rut: formData.rut,
-        password: formData.password
-      });
+        contraseña: formData.contraseña,
+      };
+
+      const response = await axios.post('https://canchas-matices.fly.dev/api/usuarios', mappedFormData);
 
       if (response.data) {
         toast.success('¡Registro exitoso! Por favor, inicia sesión.');
@@ -103,9 +153,10 @@ const Register = () => {
               <div className="mt-1 relative">
                 <input
                   type="text"
+                  name="nombre"
                   required
                   value={formData.nombre}
-                  onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="Juan"
                 />
@@ -123,9 +174,10 @@ const Register = () => {
               <div className="mt-1 relative">
                 <input
                   type="text"
+                  name="apellido"
                   required
                   value={formData.apellido}
-                  onChange={(e) => setFormData({ ...formData, apellido: e.target.value })}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="Pérez"
                 />
@@ -143,9 +195,10 @@ const Register = () => {
               <div className="mt-1 relative">
                 <input
                   type="email"
+                  name="correo"
                   required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  value={formData.correo}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="tu@ejemplo.com"
                 />
@@ -163,9 +216,10 @@ const Register = () => {
               <div className="mt-1 relative">
                 <input
                   type="text"
+                  name="rut"
                   required
                   value={formData.rut}
-                  onChange={(e) => setFormData({ ...formData, rut: e.target.value })}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="12.345.678-9"
                 />
@@ -183,9 +237,10 @@ const Register = () => {
               <div className="mt-1 relative">
                 <input
                   type={showPassword ? "text" : "password"}
+                  name="contraseña"
                   required
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  value={formData.contraseña}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="••••••••"
                 />
@@ -206,9 +261,10 @@ const Register = () => {
               <div className="mt-1 relative">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
+                  name="confirmPassword"
                   required
                   value={formData.confirmPassword}
-                  onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                  onChange={handleChange}
                   className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
                   placeholder="••••••••"
                 />
