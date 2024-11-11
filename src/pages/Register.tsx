@@ -157,7 +157,7 @@ const Register = () => {
                   required
                   value={formData.nombre}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 dark:text-white" // Color de texto ajustado
                   placeholder="Juan"
                 />
                 <FontAwesomeIcon 
@@ -178,7 +178,7 @@ const Register = () => {
                   required
                   value={formData.apellido}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 dark:text-white" // Color de texto ajustado
                   placeholder="Pérez"
                 />
                 <FontAwesomeIcon 
@@ -199,7 +199,7 @@ const Register = () => {
                   required
                   value={formData.correo}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 dark:text-white" // Color de texto ajustado
                   placeholder="tu@ejemplo.com"
                 />
                 <FontAwesomeIcon 
@@ -220,7 +220,7 @@ const Register = () => {
                   required
                   value={formData.rut}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 dark:text-white" // Color de texto ajustado
                   placeholder="12.345.678-9"
                 />
                 <FontAwesomeIcon 
@@ -241,7 +241,7 @@ const Register = () => {
                   required
                   value={formData.contraseña}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 dark:text-white" // Color de texto ajustado
                   placeholder="••••••••"
                 />
                 <button
@@ -265,7 +265,7 @@ const Register = () => {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500"
+                  className="appearance-none block w-full px-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 text-gray-900 dark:text-white" // Color de texto ajustado
                   placeholder="••••••••"
                 />
                 <button
